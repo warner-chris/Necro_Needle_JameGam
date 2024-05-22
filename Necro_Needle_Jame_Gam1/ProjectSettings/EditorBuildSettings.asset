@@ -9,7 +9,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 973b7a9a2adcbb24ca284f2b97e66a2a
   - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: 3a33094974697eb41994bbd5d889807b
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 0f1ab8f81a5df514cb9e51f322444524
+  - enabled: 1
     path: Assets/Scenes/GameTest.unity
     guid: 7d2c9662161ec8149a19065c26e5d8eb
+  - enabled: 1
+    path: Assets/Level1.unity
+    guid: 4aea13e287d5c604cb82eee6e3a5a80e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ef4fe58ec90fc7e4296ce8aee5603822, type: 2}
