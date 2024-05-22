@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Loki's Test Scene.unity
+    path: Assets/Scenes/Main Menu.unity
     guid: 973b7a9a2adcbb24ca284f2b97e66a2a
   - enabled: 1
     path: Assets/Scenes/GameTest.unity
