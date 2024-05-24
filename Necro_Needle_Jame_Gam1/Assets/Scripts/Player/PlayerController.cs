@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public List<ItemList> items = new List<ItemList>();
     [SerializeField] private float procTimer;
+    [SerializeField] private GameObject needle;
 
     private int maxNumberOfDashes = 1;
     private int dashesUsed = 0;
@@ -115,6 +116,7 @@ public class PlayerController : MonoBehaviour
             if (dashCurrTime <= 0)
             {
                 rb.velocity = Vector2.zero;
+                needle.GetComponent<NeedleController>().MoveWithPlayer(Vector2.zero);
                 isDashing = false;
             }
         }
@@ -126,7 +128,9 @@ public class PlayerController : MonoBehaviour
         if (!isDashing)
         {
             movement = context.ReadValue<Vector2>();
-            rb.velocity = new Vector2(movement.x * (Time.deltaTime + movementSpeed), movement.y * (Time.deltaTime + movementSpeed));
+            Vector2 appliedMovement = new Vector2(movement.x * (Time.deltaTime + movementSpeed), movement.y * (Time.deltaTime + movementSpeed));
+            rb.velocity = appliedMovement;
+            needle.GetComponent<NeedleController>().MoveWithPlayer(appliedMovement);
         }
     }
 
@@ -147,7 +151,9 @@ public class PlayerController : MonoBehaviour
             {
                 dashCooldownCurr = dashCooldownMax;
                 dashCurrTime = dashMaxTime;
-                rb.velocity = new Vector2(movement.x * dashSpeed, movement.y * dashSpeed);
+                Vector2 appliedDash = new Vector2(movement.x * dashSpeed, movement.y * dashSpeed);
+                rb.velocity = appliedDash;
+                needle.GetComponent<NeedleController>().MoveWithPlayer(appliedDash);
                 health.StartiFrames();
                 isDashing = true;
                 dashesUsed++;
