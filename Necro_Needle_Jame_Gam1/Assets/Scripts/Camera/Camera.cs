@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
+    internal static UnityEngine.Camera main;
+
     // The target the camera will follow
     public Transform target;
 
