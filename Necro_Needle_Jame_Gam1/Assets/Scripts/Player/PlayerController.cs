@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public List<ItemList> items = new List<ItemList>();
     [SerializeField] private float procTimer;
+    [SerializeField] private GameObject needle;
 
     private int maxNumberOfDashes = 1;
     private int dashesUsed = 0;
@@ -23,18 +24,18 @@ public class PlayerController : MonoBehaviour
     private PlayerHealth health;
     Rigidbody2D rb;
 
-    [SerializeField] private float movementSpeed;
+    [SerializeField] private float movementSpeedBase;
+    private float movementSpeed;
     [SerializeField] private float rotationSpeed;
 
     Vector2 movement;
     Vector2 lookDirection;
 
-    private Transform spawnPoint;
-
     private void Awake()
     {
         health = GetComponent<PlayerHealth>();
         rb = GetComponent<Rigidbody2D>();
+        movementSpeed = movementSpeedBase;
     }
 
     private void Start()
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour
         CheckDashCooldown();
     }
 
-    //----------------------------------------------------Item Stuffs------------------------------------------------------------------------
+//----------------------------------------------------Item Calls------------------------------------------------------------------------
     private IEnumerator CallItemUpdate()
     {
         foreach (ItemList i in items)
@@ -61,17 +62,42 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(CallItemUpdate());
     }
 
+    public void CallItemOnHit(Health _enemyHealth)
+    {
+        foreach (ItemList i in items)
+        {
+            i.item.OnHit(this, _enemyHealth, i.stacks);
+        }
+    }
+
+    public void CallItemOnAnyHit(Projectile _projectile)
+    {
+        foreach (ItemList i in items)
+        {
+            i.item.OnAnyHit(this, _projectile, i.stacks);
+        }
+    }
+
     public void CallItemOnPickUp()
     {
         var lastItem = items.Last();
         lastItem.item.OnPickUp(this, lastItem.stacks);
     }
 
-    //-----------------------------------------------Non-Health Stat Changes------------------------------------------------------------------
-
-    public void IncreaseMovementSpeed(float _gainz)
+    public void CallItemOnKill(GameObject _enemy)
     {
-        movementSpeed += _gainz;
+        foreach (ItemList i in items)
+        {
+            i.item.OnKill(_enemy, i.stacks);
+        }
+    }
+
+ //-----------------------------------------------Non-Health Stat Changes------------------------------------------------------------------
+
+    public void IncreaseMovementSpeed(float _gainz, float _multiplier)
+    {
+        movementSpeedBase += _gainz;
+        movementSpeedBase = movementSpeedBase * _multiplier;
     }
 
     public void IncreaseNumberOfDashes(int _gainz)
@@ -79,7 +105,7 @@ public class PlayerController : MonoBehaviour
         maxNumberOfDashes += _gainz;
     }
 
-    //----------------------------------------------------Upkeep Stuffs-----------------------------------------------------------------------
+//----------------------------------------------------Upkeep Stuffs-----------------------------------------------------------------------
     private void HasIFrames()
     {
         if (health.GetiFrames())
@@ -115,18 +141,21 @@ public class PlayerController : MonoBehaviour
             if (dashCurrTime <= 0)
             {
                 rb.velocity = Vector2.zero;
+                needle.GetComponent<NeedleController>().MoveWithPlayer(Vector2.zero);
                 isDashing = false;
             }
         }
     }
 
-    //---------------------------------------------------Movement Stuffs---------------------------------------------------------------------
+//---------------------------------------------------Movement Stuffs---------------------------------------------------------------------
     public void Move(InputAction.CallbackContext context)
     {
         if (!isDashing)
         {
             movement = context.ReadValue<Vector2>();
-            rb.velocity = new Vector2(movement.x * (Time.deltaTime + movementSpeed), movement.y * (Time.deltaTime + movementSpeed));
+            Vector2 appliedMovement = new Vector2(movement.x * (Time.deltaTime + movementSpeed), movement.y * (Time.deltaTime + movementSpeed));
+            rb.velocity = appliedMovement;
+            needle.GetComponent<NeedleController>().MoveWithPlayer(appliedMovement);
         }
     }
 
@@ -147,7 +176,9 @@ public class PlayerController : MonoBehaviour
             {
                 dashCooldownCurr = dashCooldownMax;
                 dashCurrTime = dashMaxTime;
-                rb.velocity = new Vector2(movement.x * dashSpeed, movement.y * dashSpeed);
+                Vector2 appliedDash = new Vector2(movement.x * dashSpeed, movement.y * dashSpeed);
+                rb.velocity = appliedDash;
+                needle.GetComponent<NeedleController>().MoveWithPlayer(appliedDash);
                 health.StartiFrames();
                 isDashing = true;
                 dashesUsed++;

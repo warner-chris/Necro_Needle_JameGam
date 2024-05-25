@@ -27,8 +27,6 @@ public class PlayerHealth  : MonoBehaviour
         {
             iFrames = false;
         }
-
-
     }
 
     public void TakeDamage(float _damage)
@@ -59,9 +57,6 @@ public class PlayerHealth  : MonoBehaviour
     public void GainMaxHealth(float _gainz)
     {
         startingHealth += _gainz;
-        Debug.Log("gainz");
-        Debug.Log(startingHealth);
-
     }
 
     private void HasDied()
