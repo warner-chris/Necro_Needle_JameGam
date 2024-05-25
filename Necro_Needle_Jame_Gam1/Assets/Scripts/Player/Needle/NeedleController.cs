@@ -5,17 +5,14 @@ using UnityEngine;
 public class NeedleController : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private float damage;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private float fireSpeed;
     private Rigidbody2D rb;
+    private Vector3 target;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    private void Start()
-    {
     }
 
     private void Update()
@@ -28,18 +25,33 @@ public class NeedleController : MonoBehaviour
         transform.RotateAround(player.transform.localPosition, Vector3.back, Time.deltaTime * rotationSpeed);
     }
 
-    private void Fire()
-    {
-    
-    }
-
-    private void Return()
-    {
-        
-    }
-
     public void MoveWithPlayer(Vector2 _applyMovement)
     {
         rb.velocity = _applyMovement;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<Health>().TakeDamage(damage);
+        }
+    }
+
+    public void IncreaseRotationSpeed(float _gainz)
+    {
+        rotationSpeed += _gainz;
+    }
+
+    public void SetInactive()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+    }
+
+    public void SetActive()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
     }
 }

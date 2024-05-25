@@ -15,6 +15,7 @@ public class ItemPickUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("collision");
         if (collision.tag == "Player")
         {
             PlayerController _player = collision.GetComponent<PlayerController>();
@@ -44,13 +45,58 @@ public class ItemPickUp : MonoBehaviour
     {
         switch (_itemToAssign)
         {
-                    default: return null;
+            //Healing Items
+            case Items.HealOverTimeItem:
+                return new HealOverTimeItem();
+            //Stat Boost Items
+            case Items.MaxHealthItem:
+                return new MaxHealthItem();
+            case Items.AttackPowerItem:
+                return new AttackPowerItem();
+            case Items.AttackSpeedItem:
+                return new AttackSpeedItem();
+            case Items.MovementSpeedItem:
+                return new MovementSpeedItem();
+            case Items.AddDashItem:
+                return new AddDashItem();
+            //Dot Items
+            case Items.BleedDotItem:
+                return new BleedDotItem();
+            case Items.ContagionItem:
+                return new ContagionItem();
+            //Projectile Mod Items
+            case Items.ExplodingDamageItem:
+                return new ExplodingDamageItem();
+            //Special Grade
+            case Items.IceItem:
+                return new IceItem();
+            case Items.SpiderWebItem:
+                return new SpiderWebItem();
+            case Items.RaiseDeadItem:
+                return new RaiseDeadItem();
+            default: return null;
         }
 
     }
 
     public enum Items
     {
-
+        //Healing Items
+        HealOverTimeItem,
+        //Stat Boost Items
+        MaxHealthItem,
+        AttackPowerItem,
+        AttackSpeedItem,
+        MovementSpeedItem,
+        AddDashItem,
+        //Dot Items
+        BleedDotItem,
+        ContagionItem,
+        //Projectile Mod Items
+        ExplodingDamageItem,
+        //Special Grade
+        IceItem,
+        SpiderWebItem,
+        RaiseDeadItem
     }
 }
