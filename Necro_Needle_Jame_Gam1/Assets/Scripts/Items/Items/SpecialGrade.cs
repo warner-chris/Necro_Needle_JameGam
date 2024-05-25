@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine.InputSystem.Layouts;
 using System;
+using Random = UnityEngine.Random;
 
 public class IceItem : Item
 {
