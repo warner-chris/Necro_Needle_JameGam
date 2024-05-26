@@ -7,23 +7,30 @@ using Random = UnityEngine.Random;
 public class ItemDrop : MonoBehaviour
 {
     [SerializeField] GameObject[] itemsList;
-    private int killsTotal;
+    private int killsTotal = 0;
     private int kills = 0;
-    private int killThreshold = 5;
+    private int killThreshold = 1;
+    private bool itemSpawning = false;
 
     public void IncrementKills(GameObject _pos)
     {
-        killsTotal++;
-        kills++;
-        if (kills >= killThreshold)
+        if (!itemSpawning)
         {
-            kills = 0;
-            killThreshold += 5;
-            DropItem(_pos);
+            kills++;
+            killsTotal++;
         }
-        else
+        if (kills >= killThreshold && !itemSpawning)
         {
-            Destroy(_pos);
+            itemSpawning = true;
+            kills = 0;
+            DropItem(_pos);
+            killThreshold += 5;
+            Debug.Log(kills);
+            Debug.Log(killThreshold);
+        }
+        else if (!itemSpawning)
+        {
+            _pos.GetComponent<Health>().CanDie();
         }
     }
 
@@ -34,4 +41,9 @@ public class ItemDrop : MonoBehaviour
         item.GetComponent<ItemPickUp>().SetEnemy(_pos);
         Debug.Log(item.transform);
     }
+
+    public void ItemDespawn()
+    {
+        itemSpawning = false;
+    }    
 }

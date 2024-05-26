@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float startingHealth;
     private bool dotApplied = false;
     private GameObject player;
+    private bool isDead = false;
 
     private float currentHealth = 999;
     private float procDotInterval = 1;
@@ -35,6 +36,7 @@ public class Health : MonoBehaviour
     private void Update()
     {
         HasDied();
+        CanDie();
     }
 
     public void TakeDamage(float _damage)
@@ -49,12 +51,24 @@ public class Health : MonoBehaviour
             if (player!= null)
             {
                 player.GetComponent<PlayerController>().CallItemOnKill(this.gameObject);
-
             }
+            this.GetComponent<BoxCollider2D>().enabled = false;
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             itemDropObj.GetComponent<ItemDrop>().IncrementKills(gameObject);
             gameObject.GetComponent<EnemyGeneral>().IsDead();
-            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            this.GetComponent<BoxCollider2D>().enabled = false;
+        }
+    }
+
+    public void HasRaised()
+    {
+        currentHealth = startingHealth;
+    }
+
+    public void CanDie()
+    {
+        if (!gameObject.GetComponent<EnemyGeneral>().isRaisedDead && isDead)
+        {
+            Destroy(this.gameObject);
         }
     }
 

@@ -19,7 +19,7 @@ public class EnemyGeneral : MonoBehaviour
     private Health health;
     [SerializeField] private float damage;
 
-    private bool isRaisedDead = false;
+    public bool isRaisedDead = false;
 
     private bool speedChanged = false;
     private float speedChangedTimer;
@@ -109,6 +109,7 @@ public class EnemyGeneral : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().color = Color.blue;
         gameObject.tag = "Thrall";
+        health.HasRaised();
         isRaisedDead = true;
     }
 
