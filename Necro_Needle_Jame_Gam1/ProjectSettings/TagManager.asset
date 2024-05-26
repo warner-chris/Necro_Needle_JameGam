@@ -7,11 +7,13 @@ TagManager:
   - Needle
   - Enemy
   - Thrall
+  - Terrain
+  - CameraSpawn
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Terrain
   - Water
   - UI
   - Enemy

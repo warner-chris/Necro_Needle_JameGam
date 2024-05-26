@@ -144,6 +144,11 @@ public class EnemyGeneral : MonoBehaviour
         speed = baseSpeed;
     }
 
+    public void IsDead()
+    {
+        speed = 0;
+    }
+
 }
 /*private void OnDrawGizmos()
 {

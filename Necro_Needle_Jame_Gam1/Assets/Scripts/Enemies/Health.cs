@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] private GameObject itemDropObj;
     [SerializeField] private float startingHealth;
     private bool dotApplied = false;
     private GameObject player;
@@ -34,7 +35,6 @@ public class Health : MonoBehaviour
     private void Update()
     {
         HasDied();
-        Debug.Log(currentHealth);
     }
 
     public void TakeDamage(float _damage)
@@ -49,8 +49,12 @@ public class Health : MonoBehaviour
             if (player!= null)
             {
                 player.GetComponent<PlayerController>().CallItemOnKill(this.gameObject);
+
             }
-            Destroy(gameObject);
+            itemDropObj.GetComponent<ItemDrop>().IncrementKills(gameObject);
+            gameObject.GetComponent<EnemyGeneral>().IsDead();
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            this.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 

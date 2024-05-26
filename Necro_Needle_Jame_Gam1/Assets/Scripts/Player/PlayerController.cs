@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private float movementSpeed;
     [SerializeField] private float rotationSpeed;
 
-    Vector2 movement;
+    public Vector2 movement;
     Vector2 lookDirection;
 
     private void Awake()
