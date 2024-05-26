@@ -6,7 +6,6 @@ using UnityEngine;
 public class SpiderWeb : MonoBehaviour
 {
     private float timer;
-    private bool done = false;
 
     private void Awake()
     {

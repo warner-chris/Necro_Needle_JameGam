@@ -7,6 +7,7 @@ public class ItemPickUp : MonoBehaviour
 {
     public Item item;
     public Items itemDrop;
+    private GameObject enemy;
 
     private void Start()
     {
@@ -15,13 +16,12 @@ public class ItemPickUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collision");
         if (collision.tag == "Player")
         {
             PlayerController _player = collision.GetComponent<PlayerController>();
             AddItem(_player);
             _player.CallItemOnPickUp();
-            Destroy(this.gameObject);
+            Destroy(enemy);
         }
     }
 
@@ -35,10 +35,8 @@ public class ItemPickUp : MonoBehaviour
                 return;
             }
         }
-
         _player.items.Add(new ItemList(item, item.GiveName(), 1));
     }
-
 
 
     public Item AssignItem(Items _itemToAssign)
@@ -98,5 +96,10 @@ public class ItemPickUp : MonoBehaviour
         IceItem,
         SpiderWebItem,
         RaiseDeadItem
+    }
+
+    public void SetEnemy(GameObject _enemy)
+    {
+        enemy = _enemy;  
     }
 }
