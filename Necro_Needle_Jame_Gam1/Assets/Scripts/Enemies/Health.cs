@@ -53,11 +53,11 @@ public class Health : MonoBehaviour
             if (player!= null)
             {
                 player.GetComponent<PlayerController>().CallItemOnKill(this.gameObject);
+                player.GetComponent<PlayerController>().killCountTotal++;
+                Destroy(gameObject);
             }
-            this.GetComponent<BoxCollider2D>().enabled = false;
-            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            itemDropObj.GetComponent<ItemDrop>().IncrementKills(gameObject);
-            gameObject.GetComponent<EnemyGeneral>().IsDead();
+
+            
         }
     }
 

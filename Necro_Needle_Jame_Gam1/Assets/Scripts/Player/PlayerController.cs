@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public int killCountTotal = 0;
     public List<ItemList> items = new List<ItemList>();
     [SerializeField] private float procTimer;
     [SerializeField] private GameObject needle;
