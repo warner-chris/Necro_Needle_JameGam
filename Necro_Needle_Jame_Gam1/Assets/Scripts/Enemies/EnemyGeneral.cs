@@ -24,6 +24,8 @@ public class EnemyGeneral : MonoBehaviour
     private bool speedChanged = false;
     private float speedChangedTimer;
 
+    private int xDirection = 1;
+
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -71,6 +73,16 @@ public class EnemyGeneral : MonoBehaviour
 
         // Move towards the target object by adding velocity in the direction of the target object
         rb.velocity = new Vector2(direction.x * (Time.fixedDeltaTime + speed), direction.y * (Time.fixedDeltaTime + speed));
+
+        if (target.position.x > transform.position.x)
+        {
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        }
+
+        else if (target.position.x < transform.position.x)
+        {
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x) * -1, transform.localScale.y);
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
