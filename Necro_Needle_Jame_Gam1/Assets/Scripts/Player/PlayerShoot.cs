@@ -32,6 +32,8 @@ public class PlayerShoot : MonoBehaviour
             canShoot = true;
             needleObj.GetComponent<NeedleController>().SetActive();
         }
+
+        OldShoot();
     }
 
     private void ApplyShot()
@@ -71,6 +73,17 @@ public class PlayerShoot : MonoBehaviour
     public void Shoot()
     {
         if (canShoot)
+        {
+            canShoot = false;
+            cooldownCurrTime = 0;
+            needleObj.GetComponent<NeedleController>().SetInactive();
+            ApplyShot();
+        }
+    }
+
+    private void OldShoot()
+    {
+        if (canShoot && Input.GetKey("space"))
         {
             canShoot = false;
             cooldownCurrTime = 0;

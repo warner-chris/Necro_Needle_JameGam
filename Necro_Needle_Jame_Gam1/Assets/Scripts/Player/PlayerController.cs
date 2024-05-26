@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
+using Input = UnityEngine.Input;
 
 public class PlayerController : MonoBehaviour
 {
@@ -55,10 +57,13 @@ public class PlayerController : MonoBehaviour
         HasIFrames();
         CheckDashTime();
         CheckDashCooldown();
-        //OldSchoolInput();
+    }
+    private void FixedUpdate()
+    {
+        OldSchoolInput();
     }
 
-//----------------------------------------------------Item Calls------------------------------------------------------------------------
+    //----------------------------------------------------Item Calls------------------------------------------------------------------------
     private IEnumerator CallItemUpdate()
     {
         foreach (ItemList i in items)
@@ -160,12 +165,15 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (!isDashing)
+        if (context.ReadValue<Vector2>() != Vector2.zero)
         {
-            movement = context.ReadValue<Vector2>();
-            Vector2 appliedMovement = new Vector2(movement.x * (Time.deltaTime + movementSpeed), movement.y * (Time.deltaTime + movementSpeed));
-            rb.velocity = appliedMovement;
-            needle.GetComponent<NeedleController>().MoveWithPlayer(appliedMovement);
+            if (!isDashing)
+            {
+                movement = context.ReadValue<Vector2>();
+                Vector2 appliedMovement = new Vector2(movement.x * (Time.deltaTime + movementSpeed), movement.y * (Time.deltaTime + movementSpeed));
+                rb.velocity = appliedMovement;
+                needle.GetComponent<NeedleController>().MoveWithPlayer(appliedMovement);
+            }
         }
     }
 
@@ -199,27 +207,43 @@ public class PlayerController : MonoBehaviour
     private void OldSchoolInput()
     {
         GetInput();
-        MoveHorizontal();
-        MoveVertical();
         OldDash();
     }
 
     private void GetInput()
     {
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
-    }
-    private void MoveHorizontal()
-    {
-    }
-
-    private void MoveVertical()
-    {
-
+        moveHorizontal = Input.GetAxisRaw("Horizontal");
+        moveVertical = Input.GetAxisRaw("Vertical");
+        if (!isDashing)
+        {
+            Vector2 appliedMovement;
+            appliedMovement.x = (moveHorizontal * movementSpeed);
+            appliedMovement.y = (moveVertical * movementSpeed);
+            movement = appliedMovement;
+            rb.velocity = appliedMovement;
+            needle.GetComponent<NeedleController>().MoveWithPlayer(appliedMovement);
+        }
     }
 
     private void OldDash()
     {
-    
+        if (Input.GetKey("left shift"))
+        {
+            Debug.Log("dashing");
+            if (!isDashing)
+            {
+                if (dashCooldownCurr <= 0 || dashesUsed < maxNumberOfDashes)
+                {
+                    dashCooldownCurr = dashCooldownMax;
+                    dashCurrTime = dashMaxTime;
+                    Vector2 appliedDash = new Vector2((movement.x * dashSpeed) /4, (movement.y * dashSpeed) /4);
+                    rb.velocity = appliedDash;
+                    needle.GetComponent<NeedleController>().MoveWithPlayer(appliedDash);
+                    health.StartiFrames();
+                    isDashing = true;
+                    dashesUsed++;
+                }
+            }
+        }
     }
 }
