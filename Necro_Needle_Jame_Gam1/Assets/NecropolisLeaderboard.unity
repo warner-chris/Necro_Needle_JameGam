@@ -979,7 +979,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 884212419}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Current Score
+  m_text: 22
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -1099,7 +1099,19 @@ MonoBehaviour:
   inputName: {fileID: 1496570387}
   submitScoreEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2044241336}
+        m_TargetAssemblyTypeName: Leaderboard, Assembly-CSharp
+        m_MethodName: SetLeaderboardEntry
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &508873394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,18 +1408,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648162266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2095424, y: 2.5559871, z: 3.525548}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 443273278}
   m_Father: {fileID: 884212419}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -195, y: 5}
+  m_AnchoredPosition: {x: -195, y: 4.999996}
   m_SizeDelta: {x: 45.4, y: 24.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &648162268
@@ -2303,8 +2315,8 @@ RectTransform:
   - {fileID: 1307288823}
   - {fileID: 1460429029}
   - {fileID: 1496570390}
-  - {fileID: 648162267}
   - {fileID: 455372858}
+  - {fileID: 648162267}
   - {fileID: 1127555015}
   - {fileID: 508873395}
   - {fileID: 1538766978}

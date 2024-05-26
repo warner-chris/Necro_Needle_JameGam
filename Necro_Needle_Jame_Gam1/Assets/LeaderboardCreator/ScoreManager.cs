@@ -10,24 +10,23 @@ public class ScoreManager : MonoBehaviour
     private TMP_InputField inputName;
 
     public UnityEvent<string, int> submitScoreEvent;
+    int score;
 
+    private void Start()
+    {
+        score = StaticData.finalScore;
+        inputScore.text = score.ToString();
+    }
     public void SubmitScore()
     {
-        int score = StaticData.finalScore;
-        Debug.Log(score);
-        string trimmedInput = inputScore.text.Trim();
-        bool parseSuccess = int.TryParse(inputScore.text, out score);
+        submitScoreEvent.Invoke(inputName.text, int.Parse(inputScore.text));
+        
+       
 
-        Debug.Log("inputName.text: " + inputName.text);
-        Debug.Log("inputScore.text (trimmed): " + trimmedInput);
-
-        if (parseSuccess)
-        {
-            submitScoreEvent.Invoke(inputName.text, int.Parse(inputScore.text));
-        }
-        else
-        {
-            Debug.LogError("Invalid score format. Please enter a valid integer.");
-        }
+     
+       
+     
     }
+
+
 }
