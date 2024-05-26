@@ -66,6 +66,7 @@ public class PlayerHealth  : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            StaticData.finalScore = gameObject.GetComponent<PlayerController>().killCountTotal;
             SceneManager.LoadScene("NecropolisLeaderboard");
             //Destroy(gameObject);
         }

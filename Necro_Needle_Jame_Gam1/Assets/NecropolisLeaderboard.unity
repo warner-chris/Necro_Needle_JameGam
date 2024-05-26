@@ -1095,8 +1095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7943d039dba7e784784440920b616bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputScore: {fileID: 0}
-  inputName: {fileID: 0}
+  inputScore: {fileID: 455372859}
+  inputName: {fileID: 1496570387}
   submitScoreEvent:
     m_PersistentCalls:
       m_Calls: []

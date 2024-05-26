@@ -13,7 +13,8 @@ public class ScoreManager : MonoBehaviour
 
     public void SubmitScore()
     {
-        int score;
+        int score = StaticData.finalScore;
+        Debug.Log(score);
         string trimmedInput = inputScore.text.Trim();
         bool parseSuccess = int.TryParse(inputScore.text, out score);
 
