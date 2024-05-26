@@ -42,9 +42,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "MoveUp",
                     "type": "Button",
-                    "id": "dc3008ff-d5b3-429e-a8d3-9572dfb7166a",
+                    "id": "d17b711c-cf2c-4301-a93d-df32a1a21a91",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveDown",
+                    "type": "Button",
+                    "id": "5bc930f5-8b14-41d7-a9c2-ef87c372e477",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveLeft",
+                    "type": "Button",
+                    "id": "3fd70ea3-d352-4556-bf10-cad29e5dfce1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveRight",
+                    "type": "Button",
+                    "id": "afa0c209-ab2d-4551-9040-40913688ca78",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -98,12 +125,45 @@
                 },
                 {
                     "name": "",
-                    "id": "13971610-77d8-4db6-91d3-0203083a8ff6",
-                    "path": "<Gamepad>/start",
+                    "id": "f6b76ebf-2e95-44cb-8a97-91887f28440d",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Pause",
+                    "groups": "Gamepad",
+                    "action": "MoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aadb3e01-a1fc-4fc6-9c9a-6247ff06d89d",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "MoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f21495a-16ee-471c-950a-9362111c0634",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f767e25-5d8d-45c9-ae78-aab007f92c8f",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "MoveRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

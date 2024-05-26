@@ -20,11 +20,9 @@ public class ItemPickUp : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("grabbed");
             PlayerController _player = collision.GetComponent<PlayerController>();
             AddItem(_player);
             _player.CallItemOnPickUp();
-            itemDropperScript.ItemDespawn();
             Destroy(this.gameObject);
         }
     }
@@ -100,11 +98,5 @@ public class ItemPickUp : MonoBehaviour
         IceItem,
         SpiderWebItem,
         RaiseDeadItem
-    }
-
-    public void SetEnemy(GameObject _enemy)
-    {
-        Debug.Log(transform.position);
-        //enemy = _enemy;  
     }
 }

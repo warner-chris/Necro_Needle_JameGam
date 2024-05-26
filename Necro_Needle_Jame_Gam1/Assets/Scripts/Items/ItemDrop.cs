@@ -9,51 +9,39 @@ public class ItemDrop : MonoBehaviour
     [SerializeField] GameObject[] itemsList;
     private int killsTotal = 0;
     private int kills = 0;
-    private int killThreshold = 10;
+    private int killThreshold = 5;
     private bool itemSpawning = false;
     private float elapsedTime;
     public AudioManager audioManager;
+    private PlayerController player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerController>();
+    }
 
 
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime % 60 == 0)
+        kills = player.killCountTotal;
+        Debug.Log(kills);
+        if (kills > killThreshold)
         {
-            DropItem(gameObject);
+            Debug.Log("Spawned");
+            kills = 0;
+            killThreshold += 3;
+            DropItem();
+
             audioManager.PlaySFX(audioManager.itemDrop);
         }
     }
 
-    public void IncrementKills(GameObject _pos)
-    {
-        if (!itemSpawning)
-        {
-            kills++;
-            killsTotal++;
-        }
-        if (kills >= killThreshold && !itemSpawning)
-        {
-            itemSpawning = true;
-            kills = 0;
-            //DropItem(_pos);
-            killThreshold += 5;
-        }
-        else if (!itemSpawning)
-        {
-            _pos.GetComponent<Health>().CanDie();
-        }
-    }
-
-    private void DropItem(GameObject _pos)
+    private void DropItem()
     {
         int rand = Random.Range(0, itemsList.Length);
-        GameObject item = Instantiate(itemsList[rand], _pos.transform);
-        item.GetComponent<ItemPickUp>().SetEnemy(_pos);
-    }
-
-    public void ItemDespawn()
-    {
-        itemSpawning = false;
-    }    
+        GameObject item = Instantiate(itemsList[rand]);
+        item.transform.position = new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.y + 1);
+        
+        item.SetActive(true);
+    }  
 }

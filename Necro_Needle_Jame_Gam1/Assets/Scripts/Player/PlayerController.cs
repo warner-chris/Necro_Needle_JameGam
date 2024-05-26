@@ -6,6 +6,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    //--------------request-----------------------
+    float moveHorizontal;
+    float moveVertical;
+
+
+
+    //----------------------------------------------
     public int killCountTotal = 0;
     public List<ItemList> items = new List<ItemList>();
     [SerializeField] private float procTimer;
@@ -48,6 +55,7 @@ public class PlayerController : MonoBehaviour
         HasIFrames();
         CheckDashTime();
         CheckDashCooldown();
+        //OldSchoolInput();
     }
 
 //----------------------------------------------------Item Calls------------------------------------------------------------------------
@@ -147,7 +155,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-//---------------------------------------------------Movement Stuffs---------------------------------------------------------------------
+    //---------------------------------------------------Movement Stuffs---------------------------------------------------------------------
+
+
     public void Move(InputAction.CallbackContext context)
     {
         if (!isDashing)
@@ -184,5 +194,32 @@ public class PlayerController : MonoBehaviour
                 dashesUsed++;
             }
         }
+    }
+
+    private void OldSchoolInput()
+    {
+        GetInput();
+        MoveHorizontal();
+        MoveVertical();
+        OldDash();
+    }
+
+    private void GetInput()
+    {
+        moveHorizontal = Input.GetAxis("Horizontal");
+        moveVertical = Input.GetAxis("Vertical");
+    }
+    private void MoveHorizontal()
+    {
+    }
+
+    private void MoveVertical()
+    {
+
+    }
+
+    private void OldDash()
+    {
+    
     }
 }
