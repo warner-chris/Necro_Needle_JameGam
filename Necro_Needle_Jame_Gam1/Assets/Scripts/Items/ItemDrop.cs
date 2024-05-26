@@ -9,8 +9,21 @@ public class ItemDrop : MonoBehaviour
     [SerializeField] GameObject[] itemsList;
     private int killsTotal = 0;
     private int kills = 0;
-    private int killThreshold = 1;
+    private int killThreshold = 10;
     private bool itemSpawning = false;
+    private float elapsedTime;
+    public AudioManager audioManager;
+
+
+    private void Update()
+    {
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime % 60 == 0)
+        {
+            DropItem(gameObject);
+            audioManager.PlaySFX(audioManager.itemDrop);
+        }
+    }
 
     public void IncrementKills(GameObject _pos)
     {
@@ -23,10 +36,8 @@ public class ItemDrop : MonoBehaviour
         {
             itemSpawning = true;
             kills = 0;
-            DropItem(_pos);
+            //DropItem(_pos);
             killThreshold += 5;
-            Debug.Log(kills);
-            Debug.Log(killThreshold);
         }
         else if (!itemSpawning)
         {
@@ -39,7 +50,6 @@ public class ItemDrop : MonoBehaviour
         int rand = Random.Range(0, itemsList.Length);
         GameObject item = Instantiate(itemsList[rand], _pos.transform);
         item.GetComponent<ItemPickUp>().SetEnemy(_pos);
-        Debug.Log(item.transform);
     }
 
     public void ItemDespawn()

@@ -9,6 +9,7 @@ TagManager:
   - Thrall
   - Terrain
   - CameraSpawn
+  - AudioManager
   layers:
   - Default
   - TransparentFX

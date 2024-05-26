@@ -26,8 +26,9 @@ public class Health : MonoBehaviour
     private int bleedStacks = 0;
     private float bleedTimerMax;
     private float bleedTimerCurr = 4;
+    public AudioManager audioManager;
 
-//------------------------------------------------Base Logic---------------------------------------------------
+    //------------------------------------------------Base Logic---------------------------------------------------
     private void Start()
     {
         currentHealth = startingHealth;
@@ -41,6 +42,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
+        audioManager.PlaySFX(audioManager.enemyDamage);
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
     }
 

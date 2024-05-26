@@ -18,7 +18,7 @@ public class Menu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("CharacterUI");
     }
 
     public void QuitGame()

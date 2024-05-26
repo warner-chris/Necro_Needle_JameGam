@@ -8,10 +8,12 @@ public class ItemPickUp : MonoBehaviour
     public Item item;
     public Items itemDrop;
     private GameObject enemy;
+    private ItemDrop itemDropperScript;
 
     private void Start()
     {
         item = AssignItem(itemDrop);
+        itemDropperScript = FindObjectOfType<ItemDrop>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,7 +24,8 @@ public class ItemPickUp : MonoBehaviour
             PlayerController _player = collision.GetComponent<PlayerController>();
             AddItem(_player);
             _player.CallItemOnPickUp();
-            Destroy(enemy);
+            itemDropperScript.ItemDespawn();
+            Destroy(this.gameObject);
         }
     }
 
@@ -102,6 +105,6 @@ public class ItemPickUp : MonoBehaviour
     public void SetEnemy(GameObject _enemy)
     {
         Debug.Log(transform.position);
-        enemy = _enemy;  
+        //enemy = _enemy;  
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth  : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerHealth  : MonoBehaviour
     private bool iFrames = false;
     [SerializeField] private float iFrameTimerMax;
     private float iFrameTimerCurrent;
+    public AudioManager audioManager;
 
     private void Start()
     {
@@ -33,6 +35,7 @@ public class PlayerHealth  : MonoBehaviour
     {
         if (!iFrames)
         {
+            audioManager.PlaySFX(audioManager.playerDamage);
             currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
             if (currentHealth > 0)
             {
@@ -63,6 +66,7 @@ public class PlayerHealth  : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            SceneManager.LoadScene("Main Menu");
             Destroy(gameObject);
         }
     }
@@ -86,5 +90,15 @@ public class PlayerHealth  : MonoBehaviour
     {
         iFrames = true;
         iFrameTimerCurrent = 0;
+    }
+
+    public float GetPlayerCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public float GetPlayerMaxHealth()
+    {
+        return startingHealth;
     }
 }
