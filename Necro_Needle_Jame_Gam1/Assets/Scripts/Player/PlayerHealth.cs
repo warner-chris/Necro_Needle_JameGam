@@ -66,8 +66,8 @@ public class PlayerHealth  : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            SceneManager.LoadScene("Main Menu");
-            Destroy(gameObject);
+            SceneManager.LoadScene("NecropolisLeaderboard");
+            //Destroy(gameObject);
         }
     }
 
