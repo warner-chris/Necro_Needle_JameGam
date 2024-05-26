@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public List<ItemList> items = new List<ItemList>();
     [SerializeField] private float procTimer;
     [SerializeField] private GameObject needle;
-    [SerializeField] private GameObject triangle;
 
     private int maxNumberOfDashes = 1;
     private int dashesUsed = 0;

@@ -14,6 +14,8 @@ public class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currTime = maxTime;
+        transform.Rotate(new Vector3(0, 0, -90));
+        transform.localScale = new Vector3(1.5f, 2f, 1);
     }
 
     private void Update()
@@ -39,6 +41,7 @@ public class Projectile : MonoBehaviour
             collision.gameObject.GetComponent<Health>().TakeDamage(projectileDamage);
             player.GetComponent<PlayerController>().CallItemOnHit(collision.gameObject.GetComponent<Health>());
             player.GetComponent<PlayerController>().CallItemOnAnyHit(this);
+            //gameObject.SetActive(false);
         }
 
         else

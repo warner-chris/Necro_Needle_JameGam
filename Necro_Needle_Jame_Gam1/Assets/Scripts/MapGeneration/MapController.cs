@@ -43,14 +43,23 @@ public class MapController : MonoBehaviour
 
         if (availableSpawns > 0)
         {
-            Instantiate(enemyPrefab, currentChunk.transform.Find("Right").transform);
-            Instantiate(enemyPrefab, currentChunk.transform.Find("Left").transform);
-            Instantiate(enemyPrefab, currentChunk.transform.Find("Top").transform);
-            Instantiate(enemyPrefab, currentChunk.transform.Find("Bottom").transform);
-            Instantiate(enemyPrefab, currentChunk.transform.Find("Right Up").transform);
-            Instantiate(enemyPrefab, currentChunk.transform.Find("Left Up").transform);
-            Instantiate(enemyPrefab, currentChunk.transform.Find("Left Bottom").transform);
-            Instantiate(enemyPrefab, currentChunk.transform.Find("Right Bottom").transform);
+            GameObject enemy;
+            enemy = Instantiate(enemyPrefab, currentChunk.transform.Find("Right").transform);
+            enemy.SetActive(true);
+            enemy = Instantiate(enemyPrefab, currentChunk.transform.Find("Left").transform);
+            enemy.SetActive(true);
+            enemy = Instantiate(enemyPrefab, currentChunk.transform.Find("Top").transform);
+            enemy.SetActive(true);
+            enemy = Instantiate(enemyPrefab, currentChunk.transform.Find("Bottom").transform);
+            enemy.SetActive(true);
+            enemy = Instantiate(enemyPrefab, currentChunk.transform.Find("Right Up").transform);
+            enemy.SetActive(true);
+            enemy = Instantiate(enemyPrefab, currentChunk.transform.Find("Left Up").transform);
+            enemy.SetActive(true);
+            enemy = Instantiate(enemyPrefab, currentChunk.transform.Find("Left Bottom").transform);
+            enemy.SetActive(true);
+            enemy = Instantiate(enemyPrefab, currentChunk.transform.Find("Right Bottom").transform);
+            enemy.SetActive(true);
             availableSpawns--;
         }
     }
